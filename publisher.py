@@ -22,4 +22,7 @@ class Publisher():
 
 	def message(self, kind, *args):
 		for identity, sub in self.subscribers.copy().iteritems():
-			sub.message(kind, *args)
+			try:
+				sub.message(kind, *args)
+			except Exception as e:
+				self.parent.say("Error in module %s: %s" % (sub.__module__, e))

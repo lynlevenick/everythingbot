@@ -26,15 +26,19 @@ class Loader(commands.Commands):
 		if name in self.loaded_modules:
 			del sys.modules[name]
 
-		self.loaded_modules[name] = True
-		exec("import %s" % name)
+		try:
+			exec("import %s" % name)
+			self.loaded_modules[name] = True
+		except ImportError as e:
+			self.publisher.parent.say("Module %s doesn't exist." % name)
+			return
 
 		config = None
 		with open("config.json") as f:
 			config = json.load(f)
 
-		self.running_modules[name] = True
 		self.publisher.add_subscriber(name, getattr(sys.modules[name], name.capitalize())(config[name]))
+		self.running_modules[name] = True
 
 	def unload_module(self, name):
 		if name in self.running_modules:
