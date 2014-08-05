@@ -12,11 +12,11 @@ def main():
 	#logging.basicConfig(level = logging.DEBUG)
 
 	config = None
-	with file('config.json') as f:
+	with file("config.json") as f:
 		config = json.load(f)
 
 	daemon = bot.Bot(options.IRC(config["IRC"]))
-	daemon.publisher.add_subscriber('loader', loader.Loader(config["loader"]))
+	daemon.publisher.add_subscriber("loader", loader.Loader(config["loader"]))
 
 	daemon.event_loop()
 	daemon.publisher.remove_all_subscribers()
@@ -24,5 +24,5 @@ def main():
 	if daemon.restart:
 		main()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 	main()
