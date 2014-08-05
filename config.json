@@ -1,0 +1,21 @@
+{
+	"IRC": {
+		"server": "irc.michaelwashere.tk",
+		"nickname": "everythingbot",
+		"port": 6667,
+		"channel": "#main"
+	},
+	"admin": {
+		"allowed_users": ["Lyn Levenick", "maldridge"]
+	},
+	"disapproval": {
+		"allowed_users": ["Lyn Levenick", "maldridge"]
+	},
+	"loader": {
+		"allowed_users": ["Lyn Levenick", "maldridge"],
+		"autoload": ["admin", "disapproval"]
+	},
+	"numberwang": {
+		"ignored_users": ["everythingbot"]
+	}
+}
