@@ -13,15 +13,15 @@ class Commands(subscriber.Subscriber):
 			if len(command) > 0:
 				nick = args[1].source.nick
 				command = command[0]
-				rest = args[1].arguments[0][len(command) + 1:]
+				rest = args[1].arguments[0][len(command) + 1:].strip()
 
 				if command in self.commands:
 					self.commands[command](nick, rest)
 				elif command == "!help":
-					if rest.strip() == self.__module__:
+					if rest == self.__module__:
 						self.publisher.parent.say("%s" % self.__module__)
 
 						for name, func in self.commands.iteritems():
 							self.publisher.parent.say("    %s: %s" % (name, func.__doc__ or "No docstring available"))
-					elif len(rest.strip()) == 0:
+					elif len(rest) == 0:
 						self.publisher.parent.say("%s" % self.__module__)

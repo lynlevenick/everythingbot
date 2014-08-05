@@ -22,14 +22,15 @@ class Disapproval(commands.Commands):
 
 	def check_score(self, nick, rest):
 		"""Provide a name as an argument to check their score!"""
-		if not rest in self.scores:
-			self.publisher.parent.say("%s has not received ANY points!" % rest)
-		else:
-			self.publisher.parent.say("%s has %d points!" % (rest, self.scores[rest]))
+		if len(rest) > 0:
+			if not rest in self.scores:
+				self.publisher.parent.say("%s has not received ANY points!" % rest)
+			else:
+				self.publisher.parent.say("%s has %d points!" % (rest, self.scores[rest]))
 
 	def disapprove(self, nick, rest):
 		"""Restricted to a subset of users. Disapproves of a user."""
-		if nick in self.allowed_users:
+		if nick in self.allowed_users and len(rest) > 0:
 			if not rest in self.scores:
 				self.scores[rest] = 1
 			else:
