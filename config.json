@@ -5,6 +5,9 @@
 		"port": 6667,
 		"channel": "#main"
 	},
+	"eightball": {
+		"ignored_users": ["everythingbot"]
+	},
 	"admin": {
 		"allowed_users": ["Lyn Levenick", "maldridge"]
 	},
