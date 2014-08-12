@@ -12,13 +12,16 @@
 		"allowed_users": ["Lyn Levenick", "maldridge"]
 	},
 	"disapproval": {
-		"allowed_users": ["Lyn Levenick", "maldridge"]
+		"allowed_users": ["Lyn Levenick", "maldridge", "phy1729"]
 	},
 	"loader": {
 		"allowed_users": ["Lyn Levenick", "maldridge"],
-		"autoload": ["admin", "disapproval"]
+		"autoload": ["admin", "disapproval", "numberwang", "youtubeinfo"]
 	},
 	"numberwang": {
+		"ignored_users": ["everythingbot"]
+	},
+	"youtubeinfo": {
 		"ignored_users": ["everythingbot"]
 	}
 }

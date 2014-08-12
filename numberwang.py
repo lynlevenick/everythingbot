@@ -30,6 +30,6 @@ class Numberwang(subscriber.Subscriber):
 						elif val == 15:
 							self.publisher.parent.say("LET'S PLAY WANGERNUMB!")
 							self.mask = 0
-							wangernumbstart = time.time()
+							self.wangernumbstart = time.time()
 						else:
 							self.publisher.parent.say("That's Numberwang!")

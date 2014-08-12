@@ -4,7 +4,7 @@ import urllib
 import urlparse
 
 url_res = [
-	"youtube\\.com/watch\\?[^\\s]*?v=([\\w-]+)",
+	"youtube\\.com/watch\\?\\S*?v=([\\w-]+)",
 	"youtu\\.be/([\\w-]+)"
 ]
 
