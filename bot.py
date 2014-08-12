@@ -13,26 +13,26 @@ class Bot(irc.bot.SingleServerIRCBot):
 		self.restart = False
 
 	def on_nicknameinuse(self, conn, event):
-		raise Exception('nickname in use')
+		raise Exception("nickname in use")
 
 	def on_welcome(self, conn, event):
 		conn.join(self.channel)
 
 	def on_privmsg(self, conn, event):
 		if self.should_process:
-			self.publisher.message('privmsg', conn, event)
+			self.publisher.message("privmsg", conn, event)
 
 	def on_pubmsg(self, conn, event):
 		if self.should_process:
-			self.publisher.message('pubmsg', conn, event)
+			self.publisher.message("pubmsg", conn, event)
 
 	def on_dccmsg(self, conn, event):
 		if self.should_process:
-			self.publisher.message('dccmsg', conn, event)
+			self.publisher.message("dccmsg", conn, event)
 
 	def on_dccchat(self, conn, event):
 		if self.should_process:
-			self.publisher.message('dccchat', conn, event)
+			self.publisher.message("dccchat", conn, event)
 
 	def event_loop(self, timeout = 0.1):
 		self._connect()
@@ -40,7 +40,7 @@ class Bot(irc.bot.SingleServerIRCBot):
 		while self.live:
 			self.should_process = time.time() >= self.start_time
 			self.ircobj.process_once(timeout)
-			self.publisher.message('update')
+			self.publisher.message("update")
 
 		self.disconnect()
 
