@@ -1,3 +1,5 @@
+import traceback
+
 class Publisher():
 	def __init__(self, parent):
 		self.parent = parent
@@ -25,4 +27,4 @@ class Publisher():
 			try:
 				sub.message(kind, *args)
 			except Exception as e:
-				self.parent.say("Error in module %s: %s" % (sub.__module__, e))
+				self.parent.say("Error in module %s: %s: %s" % (sub.__module__, e, traceback.format_exc()))

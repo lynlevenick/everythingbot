@@ -5,14 +5,18 @@
 		"port": 6667,
 		"channel": "#main"
 	},
-	"eightball": {
-		"ignored_users": ["everythingbot"]
-	},
 	"admin": {
 		"allowed_users": ["Lyn Levenick", "maldridge"]
 	},
+	"card": {
+		"ignored_users": ["everythingbot"],
+		"card_json": "allsets-2.8.9.json"
+	},
 	"disapproval": {
 		"allowed_users": ["Lyn Levenick", "maldridge", "phy1729"]
+	},
+	"eightball": {
+		"ignored_users": ["everythingbot"]
 	},
 	"loader": {
 		"allowed_users": ["Lyn Levenick", "maldridge"],

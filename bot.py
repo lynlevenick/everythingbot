@@ -46,4 +46,9 @@ class Bot(irc.bot.SingleServerIRCBot):
 
 	def say(self, message):
 		if self.connection.socket != None:
-			self.connection.privmsg(self.channel, message)
+			message = message.replace("\n", " / ").replace("\t", "    ")
+
+			while len(message) > 0:
+				message_piece = message[0:420]
+				message = message[420:]
+				self.connection.privmsg(self.channel, message_piece)
