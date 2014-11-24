@@ -53,11 +53,11 @@ class Youtubeinfo(subscriber.Subscriber):
 								resp = urllib.urlopen("http://youtube.com/get_video_info?video_id=%s" % vid_id)
 								data_unparsed = resp.read()
 								data = urlparse.parse_qs(data_unparsed)
-								title = data["title"][0]
-								length_seconds = parse_seconds(int(data["length_seconds"][0]))
+								title = unicode(data["title"][0], "utf-8")
+								length_seconds = unicode(parse_seconds(int(data["length_seconds"][0])), "utf-8")
 								self.cache[vid_id] = (title, length_seconds)
 							except Exception as e:
 								self.publisher.parent.say("Linked Youtube video not found.")
 
 						if title and length_seconds:
-							self.publisher.parent.say("Linked Youtube video: \"%s\" [%s]" % (title, length_seconds))
+							self.publisher.parent.say(u"Linked Youtube video: \"%s\" [%s]" % (title, length_seconds))
