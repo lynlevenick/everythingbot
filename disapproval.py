@@ -1,5 +1,6 @@
 import commands
 import json
+import logging
 
 class Disapproval(commands.Commands):
 	def __init__(self, config):
@@ -15,6 +16,7 @@ class Disapproval(commands.Commands):
 			with open("scores.json") as f:
 				self.scores = json.load(f)
 		except IOError as e:
+                        logging.warning("Unable to open scores.json; Creating new score file")
 			self.scores = {}
 
 			with open("scores.json", "w") as f:
@@ -36,7 +38,10 @@ class Disapproval(commands.Commands):
 			else:
 				self.scores[rest] += 1
 
+                        logging.info("%s disapproves of %s", nick, rest)
+
 			with open("scores.json", "w") as f:
+                                logging.info("Storing back updated scores")
 				json.dump(self.scores, f)
 
 			self.publisher.parent.say("%s now has %d points!" % (rest, self.scores[rest]))

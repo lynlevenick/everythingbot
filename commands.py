@@ -19,6 +19,7 @@ class Commands(subscriber.Subscriber):
 					self.commands[command](nick, rest)
 				elif command == "!help":
 					if rest == self.__module__:
+                                                # TODO: Send this message only to the user who requested help
 						self.publisher.parent.say("%s" % self.__module__)
 
 						for name, func in self.commands.iteritems():

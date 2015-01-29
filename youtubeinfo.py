@@ -1,7 +1,11 @@
+import logging
 import re
 import subscriber
+import traceback
 import urllib
 import urlparse
+
+# TODO: This file is probably very difficult to have 2/3 compat with due to use of unicode api
 
 url_res = [
 	"youtube\\.com/watch\\?\\S*?v=([\\w-]+)",
@@ -45,10 +49,15 @@ class Youtubeinfo(subscriber.Subscriber):
 						title = None
 						length_seconds = None
 
+                                                logging.info("Youtube ID=%s found in text" % vid_id)
+
 						if vid_id in self.cache:
+                                                        logging.info("Already in cache")
 							title = self.cache[vid_id][0]
 							length_seconds = self.cache[vid_id][1]
 						else:
+                                                        logging.info("Not in cache; Hitting youtube.com")
+
 							try:
 								resp = urllib.urlopen("http://youtube.com/get_video_info?video_id=%s" % vid_id)
 								data_unparsed = resp.read()
@@ -57,6 +66,8 @@ class Youtubeinfo(subscriber.Subscriber):
 								length_seconds = unicode(parse_seconds(int(data["length_seconds"][0])), "utf-8")
 								self.cache[vid_id] = (title, length_seconds)
 							except Exception as e:
+                                                                # TODO: Python 2/3 compat here
+                                                                logging.info("Failed: %s: %s" % (e, traceback.format_exc()))
 								self.publisher.parent.say("Linked Youtube video not found.")
 
 						if title and length_seconds:

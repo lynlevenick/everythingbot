@@ -1,4 +1,5 @@
 import traceback
+import logging
 
 class Publisher():
 	def __init__(self, parent):
@@ -22,9 +23,12 @@ class Publisher():
 	def get_subscriber(self, identity):
 		return self.subscribers[identity]
 
-	def message(self, kind, *args):
-		for identity, sub in self.subscribers.copy().iteritems():
-			try:
-				sub.message(kind, *args)
+        def message(self, kind, *args):
+                for identity, sub in self.subscribers.copy().iteritems():
+                        try:
+                                sub.message(kind, *args)
 			except Exception as e:
-				self.parent.say("Error in module %s: %s: %s" % (sub.__module__, e, traceback.format_exc()))
+                                # TODO: Python 2/3 compat here
+                                message = "Error in module %s: %s: %s" % (sub.__module_, e, traceback.format_exc())
+                                self.parent.say(message)
+                                logging.error(message)

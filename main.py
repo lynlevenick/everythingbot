@@ -9,8 +9,6 @@ import options
 import loader
 
 def main():
-	#logging.basicConfig(level = logging.DEBUG)
-
 	config = None
 	with file("config.json") as f:
 		config = json.load(f)
@@ -25,4 +23,5 @@ def main():
 		main()
 
 if __name__ == "__main__":
+	logging.basicConfig(filename = "bot.log", level = logging.DEBUG)
 	main()

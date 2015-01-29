@@ -1,4 +1,5 @@
 import irc.bot
+import logging
 import publisher
 import time
 
@@ -13,10 +14,12 @@ class Bot(irc.bot.SingleServerIRCBot):
 		self.restart = False
 
 	def on_nicknameinuse(self, conn, event):
+                logging.critical("Nickname in use on connect; No recovery path implemented")
 		raise Exception("nickname in use")
 
 	def on_welcome(self, conn, event):
 		conn.join(self.channel)
+                logging.info("Welcomed; Joining %s" % self.channel)
 
 	def on_privmsg(self, conn, event):
 		if self.should_process:

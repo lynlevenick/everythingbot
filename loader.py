@@ -1,5 +1,6 @@
 import commands
 import json
+import logging
 import sys
 
 class Loader(commands.Commands):
@@ -22,9 +23,12 @@ class Loader(commands.Commands):
 		}
 
 	def load_module(self, name):
+                logging.info("%s requested a load of %s" % name)
 		self.publisher.parent.say("Loading module %s." % name)
 
 		if name in self.loaded_modules:
+                        logging.info("Clearing already loaded data")
+                        # There has to be a better way to do this.
 			del sys.modules[name]
 
 		try:
@@ -35,10 +39,12 @@ class Loader(commands.Commands):
 			exec("import %s" % name)
 			self.loaded_modules[name] = True
 		except ImportError as e:
+                        logging.info("Unable to load nonexistent module %s" % name)
 			self.publisher.parent.say("Module %s doesn't exist." % name)
 			return
 
 		config = None
+                # TODO: We need a better way to open config s.t. we never open the wrong file
 		with open("config.json") as f:
 			config = json.load(f)
 
@@ -46,6 +52,8 @@ class Loader(commands.Commands):
 		self.running_modules[name] = True
 
 	def unload_module(self, name):
+                logging.info("%s requested an unload of %s" % name)
+
 		if name in self.running_modules:
 			self.publisher.parent.say("Unloading module %s." % name)
 			del self.running_modules[name]
@@ -54,6 +62,7 @@ class Loader(commands.Commands):
 			self.publisher.parent.say("Module %s not loaded." % name)
 
 	def reload_module(self, name):
+                logging.info("%s requested a reload of %s" % name)
 		self.publisher.parent.say("Reloading module %s." % name)
 
 		if name in self.running_modules:
