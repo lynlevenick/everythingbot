@@ -7,6 +7,7 @@ class Loader(commands.Commands):
 		commands.Commands.__init__(self, {
 			'!listmodules': self.do_list,
 			'!load':        self.do_load,
+                        '!modules':     self.do_list_ditto,
 			'!unload':      self.do_unload,
 			'!reload':      self.do_reload
 		})
@@ -27,6 +28,10 @@ class Loader(commands.Commands):
 			del sys.modules[name]
 
 		try:
+                        # Is there a better way to do this?
+                        # No, I don't count filtering out attempts at executing other code to be 'better'
+                        # except in the sense that it is more strictly correct- the people loading modules
+                        # should be highly trusted anyway, but I dislike using exec.
 			exec("import %s" % name)
 			self.loaded_modules[name] = True
 		except ImportError as e:
@@ -67,6 +72,10 @@ class Loader(commands.Commands):
 				self.publisher.parent.say("Please provide a single lowercase word as the argument.")
 			else:
 				self.load_module(rest.strip())
+
+        def do_list_ditto(self, nick, rest):
+                """Also lists currently running modules."""
+                self.do_list(nick, rest)
 
 	def do_unload(self, nick, rest):
 		"""Restricted to a subset of users. Unloads a module at runtime."""
