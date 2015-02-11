@@ -1,7 +1,7 @@
 {
 	"IRC": {
 		"server": "irc.michaelwashere.tk",
-		"nickname": "everythingbot",
+		"nickname": "everythingtest",
 		"port": 6667,
 		"channel": "#main"
 	},
@@ -14,9 +14,12 @@
 	"eightball": {
 		"ignored_users": ["everythingbot"]
 	},
+	"gfycatinfo": {
+		"ignored_users": ["everythingbot"]
+	},
 	"loader": {
 		"allowed_users": ["Lyn Levenick", "maldridge"],
-		"autoload": ["admin", "disapproval", "numberwang", "youtubeinfo"]
+		"autoload": ["admin", "disapproval", "gfycatinfo", "numberwang", "youtubeinfo"]
 	},
 	"numberwang": {
 		"ignored_users": ["everythingbot"]

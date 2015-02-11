@@ -23,7 +23,7 @@ class Loader(commands.Commands):
 		}
 
 	def load_module(self, name):
-                logging.info("%s requested a load of %s" % name)
+                logging.info("Requested a load of %s" % name)
 		self.publisher.parent.say("Loading module %s." % name)
 
 		if name in self.loaded_modules:
@@ -52,7 +52,7 @@ class Loader(commands.Commands):
 		self.running_modules[name] = True
 
 	def unload_module(self, name):
-                logging.info("%s requested an unload of %s" % name)
+                logging.info("Requested an unload of %s" % name)
 
 		if name in self.running_modules:
 			self.publisher.parent.say("Unloading module %s." % name)
@@ -62,7 +62,7 @@ class Loader(commands.Commands):
 			self.publisher.parent.say("Module %s not loaded." % name)
 
 	def reload_module(self, name):
-                logging.info("%s requested a reload of %s" % name)
+                logging.info("Requested a reload of %s" % name)
 		self.publisher.parent.say("Reloading module %s." % name)
 
 		if name in self.running_modules:
